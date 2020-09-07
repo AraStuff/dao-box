@@ -3,6 +3,11 @@
 node libary for spinning up DAOs from node projects
 
 ## usage
+0. install the library
+```
+yarn add dao-box
+```
+
 1. import the template from the package
 
 ```javascript
