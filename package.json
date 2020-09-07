@@ -1,0 +1,15 @@
+{
+  "name": "dao-box",
+  "version": "1.0.0",
+  "entry": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@aragon/truffle-config-v5": "^1.0.1",
+    "ethers": "^5.0.8",
+    "ora": "^5.1.0"
+  }
+}
