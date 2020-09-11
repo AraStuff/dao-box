@@ -1,4 +1,5 @@
 const Ethers = require("ethers");
+const { connect } = require("@aragon/connect"xz);
 const companyTemplateAbi = require("../abis/companyTemplate.json");
 const newTokenAndInstance =
   "newTokenAndInstance(string,string,string,address[],uint256[],uint64[3],uint64,bool)";
@@ -7,7 +8,7 @@ function defaultSigner() {
   const seed =
     "explain tackle mirror kit van hammer degree position ginger unfair soup bonus";
   const wallet = new Ethers.Wallet.fromMnemonic(seed);
-  const ethersProvider = Ethers.getDefaultProvider('rinkeby');
+  const ethersProvider = Ethers.getDefaultProvider("rinkeby");
   return wallet.connect(ethersProvider);
 }
 
@@ -64,7 +65,24 @@ async function companyDao({
     companyTemplateContract,
     tx.hash
   );
-  return daoAddress;
+
+  const org = await connect(daoAddress, "ethereum", { network: network });
+  const apps = await org.apps();
+  const permissions = await org.permissions();
+  const acl = permissions.filter(
+    (p) =>
+      p.roleHash ===
+      `0x0b719b33c83b8e5d300c521cb8b54ae9bd933996a14bef8c2f4e0285d2d2400a`
+  )[0].appAddress;
+
+  return {
+    dao: daoAddress,
+    token_manager: apps.find((app) => app.name === "token-manager").address,
+    voting: apps.find((app) => app.name === "voting").address,
+    agent: apps.find((app) => app.name === "agent").address,
+    finance: apps.find((app) => app.name === "finance").address,
+    acl: acl,
+  };
 }
 
 module.exports = { companyDao };
