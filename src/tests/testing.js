@@ -1,4 +1,4 @@
-const { companyDao } = require('./index.js')
+const { companyDao } = require('../index.js')
 const Ora = require('ora');
 
 const spinner = Ora('deploying DAO...')

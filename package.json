@@ -1,6 +1,6 @@
 {
   "name": "dao-box",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "entry": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
